@@ -1,4 +1,4 @@
-from . import bsa
+from . import message
 import copy
 from kafka import KafkaConsumer, KafkaProducer, KafkaAdminClient
 import sys
@@ -28,31 +28,31 @@ def main():
         mess = Message()
 
         if not health_status():
-            if vessel_type() == "ship":
-                if major_change_1():
+            if craft_type() == "drone":
+                if major_change_drone():
                     update_heartbeat()
-                    send_mess()
+                    send_message()
                     update_sent_mess()
-            # if vessel_type() == "jetski":
-            #     if major_change_2():
+            # if craft_type() == "jet":
+            #     if major_change_jet():
             #         update_heartbeat()
-            #         send_mess()
+            #         send_message()
             #         update_sent_mess()
-            # if vessel_type() == "tugboat":
-            #     if major_change_3():
+            # if craft_type() == "balloon":
+            #     if major_change_balloon():
             #         update_heartbeat()
-            #         send_mess()
+            #         send_message()
             #         update_sent_mess()
 
 
-def send_mess():
+def send_message():
     producer.send("mess", mess)
     producer.flush()
 
 def update_heartbeat():
     heartbeat = copy.deepcopy(mess)
 
-def update_sent_mess():
+def update_sent_message():
     send_mess = copy.deepcopy(mess)
 
 
@@ -70,7 +70,7 @@ def unit_name_type(bsa_sample):
     if bsa_sample.unit_name_type == 3:
         return 
     
-def major_change_ship():
+def major_change_drone():
     if course_diff() > 10:
         return True
     if depth_diff() > 5:

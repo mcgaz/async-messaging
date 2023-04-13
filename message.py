@@ -4,8 +4,8 @@ import operator
 class Message():
     def __init__(self,
                  message_type,
-                 vessel_id,
-                 vessel_type,
+                 craft_id,
+                 craft_type,
                  time,
                  latitude,
                  longitude,
